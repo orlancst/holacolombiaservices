@@ -17,45 +17,50 @@ const Home = () => {
 
     return (
         <div>
-            {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/80 to-white py-20 lg:py-32 overflow-hidden">
+                        {/* Hero Section */}
+            <section className="relative bg-gradient-to-br from-primary via-primary/80 to-white py-32 lg:py-40 overflow-hidden">
+                {/* Background Image with Overlay */}
+                <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                        backgroundImage: 'url(https://dsvrbyxlhsybiunslwib.supabase.co/storage/v1/object/public/web_images/barranquilla-header.jpg)',
+                    }}
+                >
+                    {/* Dark overlay for better text contrast */}
+                    <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+
+                {/* Decorative blobs */}
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-10 left-10 w-40 h-40 bg-yellow-400 rounded-full blur-3xl"></div>
                     <div className="absolute bottom-10 right-10 w-60 h-60 bg-blue-400 rounded-full blur-3xl"></div>
                 </div>
+
+                {/* Content */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-                                {t('hero.title')}
-                            </h1>
-                            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                                {t('hero.subtitle')}
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <Link
-                                    to="/request-service"
-                                    className="inline-flex items-center justify-center px-8 py-4 bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl"
-                                >
-                                    {t('hero.cta')}
-                                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
-                                </Link>
-                                <Link
-                                    to="/about"
-                                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-800 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-md"
-                                >
-                                    {t('hero.learnMore')}
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="hidden lg:block">
-                            <img
-                                src="https://placehold.co/600x400/c3e3fd/1f2937/png?text=Barranquilla"
-                                alt="Barranquilla"
-                                className="rounded-2xl shadow-2xl"
-                            />
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                            {t('hero.title')}
+                        </h1>
+                        <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed drop-shadow-md">
+                            {t('hero.subtitle')}
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link
+                                to="/request-service"
+                                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-gray-900 font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl"
+                            >
+                                {t('hero.cta')}
+                                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </Link>
+                            <Link
+                                to="/about"
+                                className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300 shadow-md border border-white/30"
+                            >
+                                {t('hero.learnMore')}
+                            </Link>
                         </div>
                     </div>
                 </div>
