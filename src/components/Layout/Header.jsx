@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../LanguageSwitcher';
+import logo from '../../assets/holacolombialogo.png';
 
 const Header = () => {
     const { t } = useTranslation();
@@ -16,7 +17,7 @@ const Header = () => {
         { path: '/languages', label: t('nav.languages') },
         { path: '/carnival', label: t('nav.carnival') },
         { path: '/tourism', label: t('nav.tourism') },
-        { path: '/contact', label: t('nav.contact') },
+        { path: '/request-service', label: t('nav.contact') },
     ];
 
     const isActive = (path) => location.pathname === path;
@@ -27,12 +28,11 @@ const Header = () => {
                 <div className="flex justify-between items-center h-16 lg:h-20">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2">
-                        <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                            <span className="text-xl">🇨🇴</span>
-                        </div>
-                        <span className="text-lg font-bold text-gray-800 hidden sm:block">
-                            Hola Colombia
-                        </span>
+                        <img
+                            src={logo}
+                            alt="Hola Colombia Services"
+                            className="h-8 lg:h-10 w-auto"
+                        />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -42,8 +42,8 @@ const Header = () => {
                                 key={link.path}
                                 to={link.path}
                                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive(link.path)
-                                        ? 'bg-primary text-gray-800'
-                                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
+                                    ? 'bg-primary text-gray-800'
+                                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
                                     }`}
                             >
                                 {link.label}
@@ -97,8 +97,8 @@ const Header = () => {
                                     to={link.path}
                                     onClick={() => setIsMenuOpen(false)}
                                     className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive(link.path)
-                                            ? 'bg-primary text-gray-800'
-                                            : 'text-gray-600 hover:bg-gray-100'
+                                        ? 'bg-primary text-gray-800'
+                                        : 'text-gray-600 hover:bg-gray-100'
                                         }`}
                                 >
                                     {link.label}

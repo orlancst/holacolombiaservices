@@ -173,8 +173,11 @@
         "ctaButton": "Plan Your Tour"
     },
     "contact": {
-        "title": "Contact Us",
-        "subtitle": "We're here to help",
+        "badge": "Start Your Journey",
+        "title": "Request Your Service",
+        "subtitle": "Fill out the form below and we'll get back to you within 24 hours to confirm availability and details",
+        "feature1": "Quick Response",
+        "feature2": "Professional Service",
         "infoTitle": "Contact Information",
         "email": "Email",
         "facebook": "Facebook",
@@ -185,7 +188,10 @@
         "formIntro": "Complete this form to request our services. We will contact you to confirm availability and details.",
         "formNote": "This is a service request, not an automatic confirmation.",
         "successTitle": "Thank you for contacting Hola Colombia Services!",
-        "successMessage": "We have received your request and will contact you as soon as possible to confirm availability and service details."
+        "successMessage": "We have received your request and will contact you as soon as possible to confirm availability and service details.",
+        "nextSteps": "What happens next?",
+        "nextStepsMessage": "Our team will review your request and contact you within 24 hours via WhatsApp or email to confirm the service details and availability.",
+        "returnHome": "Return to Home"
     },
     "form": {
         "section1": "Personal Information",
@@ -247,6 +253,7 @@
         "contactConsent": "I accept to be contacted by Hola Colombia Services to respond to this request",
         "dataNotice": "By submitting this form, I accept the treatment of my personal data in accordance with current Colombian regulations.",
         "submit": "Submit Request",
+        "sending": "Sending...",
         "required": "Required"
     },
     "whyHire": {

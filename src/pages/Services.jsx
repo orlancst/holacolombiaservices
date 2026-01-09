@@ -78,7 +78,7 @@ const Services = () => {
                             <h3 className="text-xl font-bold text-gray-800 mb-3">{t('services.medicalTitle')}</h3>
                             <p className="text-gray-700 mb-4">{t('services.medicalDesc')}</p>
                             <Link
-                                to="/contact"
+                                to="/request-service"
                                 className="inline-flex items-center text-gray-800 font-semibold hover:underline"
                             >
                                 {t('common.contactUs')}
@@ -163,7 +163,7 @@ const Services = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-3xl font-bold mb-6">{t('home.ctaTitle')}</h2>
                     <Link
-                        to="/contact"
+                        to="/request-service"
                         className="inline-flex items-center justify-center px-8 py-4 bg-primary text-gray-800 font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300"
                     >
                         {t('common.contactUs')}

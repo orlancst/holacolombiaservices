@@ -34,7 +34,7 @@ const Home = () => {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Link
-                                    to="/contact"
+                                    to="/request-service"
                                     className="inline-flex items-center justify-center px-8 py-4 bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl"
                                 >
                                     {t('hero.cta')}
@@ -145,7 +145,7 @@ const Home = () => {
                         {t('home.ctaText')}
                     </p>
                     <Link
-                        to="/contact"
+                        to="/request-service"
                         className="inline-flex items-center justify-center px-8 py-4 bg-primary text-gray-800 font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300 shadow-lg"
                     >
                         {t('home.ctaButton')}

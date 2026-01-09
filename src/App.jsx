@@ -21,7 +21,7 @@ function App() {
           <Route path="languages" element={<Languages />} />
           <Route path="carnival" element={<Carnival />} />
           <Route path="tourism" element={<Tourism />} />
-          <Route path="contact" element={<Contact />} />
+          <Route path="request-service" element={<Contact />} />
         </Route>
       </Routes>
     </BrowserRouter>

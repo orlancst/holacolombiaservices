@@ -173,19 +173,25 @@
         "ctaButton": "Planeje seu Tour"
     },
     "contact": {
-        "title": "Entre em Contato",
-        "subtitle": "Estamos aqui para ajudar",
+        "badge": "Comece Sua Jornada",
+        "title": "Solicite Seu Serviço",
+        "subtitle": "Preencha o formulário abaixo e entraremos em contato em 24 horas para confirmar disponibilidade e detalhes",
+        "feature1": "Resposta Rápida",
+        "feature2": "Serviço Profissional",
         "infoTitle": "Informações de Contato",
         "email": "E-mail",
         "facebook": "Facebook",
         "facebookStatus": "(Em desenvolvimento)",
         "instagram": "Instagram",
         "instagramStatus": "(Em breve)",
-        "formTitle": "Formulário de Solicitação de Serviços",
+        "formTitle": "Formulário de Solicitação de Serviço",
         "formIntro": "Preencha este formulário para solicitar nossos serviços. Entraremos em contato para confirmar disponibilidade e detalhes.",
         "formNote": "Esta é uma solicitação de serviço, não uma confirmação automática.",
         "successTitle": "Obrigado por entrar em contato com Hola Colombia Services!",
-        "successMessage": "Recebemos sua solicitação e entraremos em contato o mais breve possível para confirmar disponibilidade e detalhes do serviço."
+        "successMessage": "Recebemos sua solicitação e entraremos em contato o mais breve possível para confirmar disponibilidade e detalhes do serviço.",
+        "nextSteps": "O que acontece agora?",
+        "nextStepsMessage": "Nossa equipe revisará sua solicitação e entrará em contato em até 24 horas via WhatsApp ou e-mail para confirmar os detalhes do serviço e disponibilidade.",
+        "returnHome": "Voltar ao Início"
     },
     "form": {
         "section1": "Informações Pessoais",
@@ -247,6 +253,7 @@
         "contactConsent": "Aceito ser contatado pela Hola Colombia Services para responder a esta solicitação",
         "dataNotice": "Ao enviar este formulário, aceito o tratamento dos meus dados pessoais de acordo com a legislação colombiana vigente.",
         "submit": "Enviar Solicitação",
+        "sending": "Enviando...",
         "required": "Obrigatório"
     },
     "whyHire": {

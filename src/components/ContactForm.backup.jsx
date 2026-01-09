@@ -41,7 +41,6 @@ const ContactForm = () => {
     const [countries, setCountries] = useState([]);
     const [accompanimentTypes, setAccompanimentTypes] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
     // Fetch countries from API
     useEffect(() => {
@@ -104,13 +103,7 @@ const ContactForm = () => {
                 setFormData({ ...formData, [name]: checked });
             }
         } else {
-            // Only allow numeric characters for WhatsApp number
-            if (name === 'whatsapp_number') {
-                const numericValue = value.replace(/\D/g, '');
-                setFormData({ ...formData, [name]: numericValue });
-            } else {
-                setFormData({ ...formData, [name]: value });
-            }
+            setFormData({ ...formData, [name]: value });
         }
 
         // Clear error when field is updated
@@ -148,131 +141,37 @@ const ContactForm = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        
-        // Prevent double submission
-        if (isSubmitting) return;
-        if (!validateForm()) return;
-
-        setIsSubmitting(true);
-
-        try {
-            // 1. Prepare service_date (combine date + time)
-            const serviceDatetime = formData.service_time
-                ? `${formData.service_date}T${formData.service_time}:00`
-                : `${formData.service_date}T12:00:00`;
-
-            // 2. Prepare service request data
-            const serviceRequestData = {
-                fullname: formData.fullname,
-                nationality: formData.nationality,
-                email: formData.email,
+        if (validateForm()) {
+            // Prepare data for submission
+            const submissionData = {
+                ...formData,
+                // Combine country code with whatsapp number
                 whatsapp_number: `${formData.countryCode}${formData.whatsapp_number}`.replace(/\s+/g, ''),
-                main_service: parseInt(formData.main_service),
-                accompaniment_other: formData.accompaniment_other || null,
-                service_language_id: parseInt(formData.service_language_id),
-                service_date: serviceDatetime,
-                service_duration_id: formData.service_duration_id ? parseInt(formData.service_duration_id) : null,
-                spanish_survival: formData.spanish_survival,
-                spanish_daily: formData.spanish_daily,
-                spanish_conversational: formData.spanish_conversational,
-                spanish_class_modality: formData.spanish_class_modality ? parseInt(formData.spanish_class_modality) : null,
-                additional_message: formData.additional_message || null,
-                accept_data_policy: formData.accept_data_policy,
-                accept_contact: formData.accept_contact,
-                status_id: 1 // Pending
+                // Combine date and time into timestamp
+                service_date: formData.service_time
+                    ? `${formData.service_date}T${formData.service_time}:00`
+                    : `${formData.service_date}T12:00:00`,
             };
 
-            // 3. Insert service_request
-            const { data: serviceRequest, error: serviceError } = await supabase
-                .from('service_requests')
-                .insert([serviceRequestData])
-                .select()
-                .single();
+            // Remove temporary fields
+            delete submissionData.countryCode;
+            delete submissionData.service_time;
 
-            if (serviceError) {
-                console.error('Error inserting service request:', serviceError);
-                alert('Error al enviar el formulario. Por favor, intenta nuevamente.');
-                setIsSubmitting(false);
-                return;
-            }
-
-            // 4. If Interpretation Accompaniment (ID 1), insert accompaniments
-            if (formData.main_service === '1' && formData.accompaniment_types.length > 0) {
-                const accompanimentRecords = formData.accompaniment_types.map(typeId => ({
-                    service_req_id: serviceRequest.id,
-                    accompainment_id: typeId
-                }));
-
-                const { error: accompError } = await supabase
-                    .from('request_accompainments')
-                    .insert(accompanimentRecords);
-
-                if (accompError) {
-                    console.error('Error inserting accompaniments:', accompError);
-                    // Don't fail the whole request, just log the error
-                }
-            }
-
-            // 5. Show success
-            console.log('Service request created:', serviceRequest);
+            console.log('Form submitted:', submissionData);
             setSubmitted(true);
-
-        } catch (error) {
-            console.error('Unexpected error:', error);
-            alert('Error inesperado. Por favor, intenta nuevamente.');
-            setIsSubmitting(false);
         }
     };
 
-
     if (submitted) {
         return (
-            <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-green-50 to-emerald-50">
-                <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-12 text-center border border-green-100">
-                    {/* Success Icon */}
-                    <div className="mb-8">
-                        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
-                            <svg className="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </div>
-                    </div>
-
-                    {/* Title */}
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                        {t('contact.successTitle')}
-                    </h2>
-
-                    {/* Message */}
-                    <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                        {t('contact.successMessage')}
-                    </p>
-
-                    {/* Additional Info */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
-                        <div className="flex items-start space-x-3">
-                            <svg className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path>
-                            </svg>
-                            <div className="text-left">
-                                <h3 className="font-semibold text-blue-900 mb-2">{t('contact.nextSteps')}</h3>
-                                <p className="text-blue-800 text-sm leading-relaxed">
-                                    {t('contact.nextStepsMessage')}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Home Button */}
-                    <button
-                        onClick={() => window.location.href = '/'}
-                        className="bg-primary hover:bg-primary-darker text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                    >
-                        {t('contact.returnHome')}
-                    </button>
-                </div>
+            <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+                <span className="text-5xl mb-4 block">✅</span>
+                <h3 className="text-2xl font-bold text-green-800 mb-3">
+                    {t('contact.successTitle')}
+                </h3>
+                <p className="text-green-700">{t('contact.successMessage')}</p>
             </div>
         );
     }
@@ -349,17 +248,16 @@ const ContactForm = () => {
                                 <option value="">Code</option>
                                 {countries.map((country) => (
                                     <option key={country.code} value={country.dial_code}>
-                                        {country.dial_code} ({country.code})
+                                        {country.dial_code} {country.code}
                                     </option>
                                 ))}
                             </select>
                             <input
                                 type="tel"
                                 name="whatsapp_number"
-                                maxLength={10}
                                 value={formData.whatsapp_number}
                                 onChange={handleInputChange}
-                                placeholder="3001234567"
+                                placeholder="1234567890"
                                 className={`flex-1 px-4 py-3 rounded-xl border ${errors.whatsapp_number ? 'border-red-400 bg-red-50' : 'border-gray-200'
                                     } focus:border-primary-darker focus:ring-2 focus:ring-primary/20 outline-none transition-all`}
                             />
@@ -400,25 +298,76 @@ const ContactForm = () => {
                     </h3>
                     <p className="text-sm text-gray-600 mb-4">{t('form.selectAccompaniment')}</p>
                     <div className="grid md:grid-cols-2 gap-4">
-                        {accompanimentTypes.map((type) => {
-                            const currentLang = i18n.language;
-                            const labelKey = currentLang === 'es' ? 'name_es' : currentLang === 'pt' ? 'name_pt' : 'name_en';
-                            const label = type[labelKey] || type.name_en;
-
-                            return (
-                                <label key={type.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
-                                    <input
-                                        type="checkbox"
-                                        name="accompaniment_types"
-                                        value={type.id}
-                                        checked={formData.accompaniment_types.includes(type.id)}
-                                        onChange={handleInputChange}
-                                        className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
-                                    />
-                                    <span className="text-gray-700">{label}</span>
-                                </label>
-                            );
-                        })}
+                        <label className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
+                            <input
+                                type="checkbox"
+                                name="accompaniment_medical"
+                                checked={formData.accompaniment_medical}
+                                onChange={handleInputChange}
+                                className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="text-gray-700">{t('form.medical')}</span>
+                        </label>
+                        <label className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
+                            <input
+                                type="checkbox"
+                                name="accompaniment_banking"
+                                checked={formData.accompaniment_banking}
+                                onChange={handleInputChange}
+                                className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="text-gray-700">{t('form.banking')}</span>
+                        </label>
+                        <label className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
+                            <input
+                                type="checkbox"
+                                name="accompaniment_legal"
+                                checked={formData.accompaniment_legal}
+                                onChange={handleInputChange}
+                                className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="text-gray-700">{t('form.legal')}</span>
+                        </label>
+                        <label className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
+                            <input
+                                type="checkbox"
+                                name="accompaniment_tourism"
+                                checked={formData.accompaniment_tourism}
+                                onChange={handleInputChange}
+                                className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="text-gray-700">{t('form.touristic')}</span>
+                        </label>
+                        <label className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
+                            <input
+                                type="checkbox"
+                                name="accompaniment_carnival"
+                                checked={formData.accompaniment_carnival}
+                                onChange={handleInputChange}
+                                className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="text-gray-700">{t('form.carnival')}</span>
+                        </label>
+                        <label className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
+                            <input
+                                type="checkbox"
+                                name="accompaniment_hotels_shopping"
+                                checked={formData.accompaniment_hotels_shopping}
+                                onChange={handleInputChange}
+                                className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="text-gray-700">{t('form.hotels')}</span>
+                        </label>
+                        <label className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors">
+                            <input
+                                type="checkbox"
+                                name="accompaniment_personal"
+                                checked={formData.accompaniment_personal}
+                                onChange={handleInputChange}
+                                className="w-5 h-5 text-primary-darker rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="text-gray-700">{t('form.personalInterp')}</span>
+                        </label>
                     </div>
                     <div className="mt-4">
                         <label className={labelClasses}>{t('form.other')}</label>
@@ -642,24 +591,13 @@ const ContactForm = () => {
             {/* Submit Button */}
             <button
                 type="submit"
-                disabled={!formData.accept_data_policy || !formData.accept_contact || isSubmitting}
-                className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center ${
-                    formData.accept_data_policy && formData.accept_contact && !isSubmitting
-                        ? 'bg-gray-800 text-white hover:bg-gray-900 shadow-lg hover:shadow-xl'
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                }`}
+                disabled={!formData.accept_data_policy || !formData.accept_contact}
+                className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center ${formData.accept_data_policy && formData.accept_contact
+                    ? 'bg-gray-800 text-white hover:bg-gray-900 shadow-lg hover:shadow-xl'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
             >
-                {isSubmitting ? (
-                    <>
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        {t('form.sending')}
-                    </>
-                ) : (
-                    <>👉 {t('form.submit')}</>
-                )}
+                👉 {t('form.submit')}
             </button>
         </form>
     );

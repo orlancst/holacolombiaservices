@@ -173,19 +173,25 @@
         "ctaButton": "Planifica tu Tour"
     },
     "contact": {
-        "title": "Contáctanos",
-        "subtitle": "Estamos aquí para ayudarte",
+        "badge": "Comienza Tu Viaje",
+        "title": "Solicita Tu Servicio",
+        "subtitle": "Completa el formulario a continuación y te responderemos en 24 horas para confirmar disponibilidad y detalles",
+        "feature1": "Respuesta Rápida",
+        "feature2": "Servicio Profesional",
         "infoTitle": "Información de Contacto",
         "email": "Correo Electrónico",
         "facebook": "Facebook",
         "facebookStatus": "(En desarrollo)",
         "instagram": "Instagram",
         "instagramStatus": "(Próximamente)",
-        "formTitle": "Formulario de Solicitud de Servicios",
+        "formTitle": "Formulario de Solicitud de Servicio",
         "formIntro": "Completa este formulario para solicitar nuestros servicios. Te contactaremos para confirmar disponibilidad y detalles.",
         "formNote": "Esta es una solicitud de servicio, no una confirmación automática.",
         "successTitle": "¡Gracias por contactar a Hola Colombia Services!",
-        "successMessage": "Hemos recibido tu solicitud y te contactaremos lo antes posible para confirmar disponibilidad y detalles del servicio."
+        "successMessage": "Hemos recibido tu solicitud y te contactaremos lo antes posible para confirmar disponibilidad y detalles del servicio.",
+        "nextSteps": "¿Qué sigue ahora?",
+        "nextStepsMessage": "Nuestro equipo revisará tu solicitud y te contactará dentro de 24 horas vía WhatsApp o correo electrónico para confirmar los detalles del servicio y disponibilidad.",
+        "returnHome": "Volver al Inicio"
     },
     "form": {
         "section1": "Información Personal",
@@ -233,7 +239,7 @@
         "specificLocation": "Lugar específico o punto de encuentro",
         "section7": "Clases de Español",
         "classType": "Tipo de clase de español",
-        "survival": "Español de supervivencia",
+        "survival": "Español para sobrevivir",
         "dailyLife": "Español de la vida diaria",
         "conversational": "Español conversacional",
         "modality": "Modalidad preferida",
@@ -247,6 +253,7 @@
         "contactConsent": "Acepto ser contactado por Hola Colombia Services para responder a esta solicitud",
         "dataNotice": "Al enviar este formulario, acepto el tratamiento de mis datos personales conforme a la normativa colombiana vigente.",
         "submit": "Enviar Solicitud",
+        "sending": "Enviando...",
         "required": "Requerido"
     },
     "whyHire": {

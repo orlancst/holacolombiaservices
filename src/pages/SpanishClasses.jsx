@@ -123,7 +123,7 @@ const SpanishClasses = () => {
                                 {t('spanishClasses.survivalDesc')}
                             </p>
                             <Link
-                                to="/contact"
+                                to="/request-service"
                                 className="inline-flex items-center justify-center px-8 py-4 bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-900 transition-all duration-300"
                             >
                                 {t('spanishClasses.ctaButton')}

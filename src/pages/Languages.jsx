@@ -101,7 +101,7 @@ const Languages = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-3xl font-bold mb-6">{t('home.ctaTitle')}</h2>
                     <Link
-                        to="/contact"
+                        to="/request-service"
                         className="inline-flex items-center justify-center px-8 py-4 bg-primary text-gray-800 font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300"
                     >
                         {t('common.contactUs')}

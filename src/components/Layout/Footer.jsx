@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import logo from '../../assets/holacolombialogo_white.png';
 
 const Footer = () => {
     const { t } = useTranslation();
@@ -9,7 +10,7 @@ const Footer = () => {
         { path: '/', label: t('nav.home') },
         { path: '/about', label: t('nav.about') },
         { path: '/services', label: t('nav.services') },
-        { path: '/contact', label: t('nav.contact') },
+        { path: '/request-service', label: t('nav.contact') },
     ];
 
     return (
@@ -18,12 +19,11 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* Brand */}
                     <div className="lg:col-span-1">
-                        <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                                <span className="text-xl">🇨🇴</span>
-                            </div>
-                            <span className="text-lg font-bold">Hola Colombia</span>
-                        </div>
+                        <img
+                            src={logo}
+                            alt="Hola Colombia Services"
+                            className="h-12 w-auto mb-4"
+                        />
                         <p className="text-gray-400 text-sm">{t('footer.tagline')}</p>
                     </div>
 

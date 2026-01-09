@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Mail, Facebook, Instagram, MapPin } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 
 const Contact = () => {
@@ -6,16 +7,42 @@ const Contact = () => {
 
     return (
         <div>
-            {/* Hero Section */}
-            <section className="bg-gradient-to-br from-primary/40 to-primary/10 py-16 lg:py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            {/* Hero Section - More Prominent */}
+            <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-20 lg:py-32 overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute inset-0" style={{
+                        backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                        backgroundSize: '40px 40px'
+                    }}></div>
+                </div>
+
+                {/* Content */}
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <div className="inline-flex items-center px-4 py-2 bg-primary/20 rounded-full mb-6">
+                            <span className="text-primary font-semibold text-sm">✨ {t('contact.badge')}</span>
+                        </div>
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                             {t('contact.title')}
                         </h1>
-                        <p className="text-xl text-gray-600">
+                        <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
                             {t('contact.subtitle')}
                         </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <div className="flex items-center space-x-2 text-primary">
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span className="text-white">{t('contact.feature1')}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-primary">
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span className="text-white">{t('contact.feature2')}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -32,62 +59,52 @@ const Contact = () => {
                                 </h2>
 
                                 {/* Email */}
-                                <div className="flex items-start space-x-4 mb-6">
-                                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <span className="text-xl">📧</span>
+                                <div className="mb-6">
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <Mail className="w-4 h-4 text-primary-darker" />
+                                        <p className="text-sm font-semibold text-gray-700">{t('contact.email')}</p>
                                     </div>
-                                    <div>
-                                        <p className="text-sm text-gray-500 mb-1">{t('contact.email')}</p>
-                                        <a
-                                            href="mailto:hola.colombiaservices@gmail.com"
-                                            className="text-gray-800 font-medium hover:text-primary-darker transition-colors break-all"
-                                        >
-                                            hola.colombiaservices@gmail.com
-                                        </a>
-                                    </div>
+                                    <a
+                                        href="mailto:hola.colombiaservices@gmail.com"
+                                        className="text-gray-800 hover:text-primary-darker transition-colors break-all ml-6"
+                                    >
+                                        hola.colombiaservices@gmail.com
+                                    </a>
                                 </div>
 
                                 {/* Facebook */}
-                                <div className="flex items-start space-x-4 mb-6">
-                                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <span className="text-xl">📘</span>
+                                <div className="mb-6">
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <Facebook className="w-4 h-4 text-primary-darker" />
+                                        <p className="text-sm font-semibold text-gray-700">{t('contact.facebook')}</p>
                                     </div>
-                                    <div>
-                                        <p className="text-sm text-gray-500 mb-1">{t('contact.facebook')}</p>
-                                        <p className="text-gray-800 font-medium">
-                                            Hola Colombia Services
-                                            <span className="text-gray-400 text-sm ml-2">{t('contact.facebookStatus')}</span>
-                                        </p>
-                                    </div>
+                                    <p className="text-gray-800 ml-6">
+                                        Hola Colombia Services
+                                        <span className="text-gray-400 text-sm ml-2">{t('contact.facebookStatus')}</span>
+                                    </p>
                                 </div>
 
                                 {/* Instagram */}
-                                <div className="flex items-start space-x-4 mb-8">
-                                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
-                                        <span className="text-xl">📷</span>
+                                <div className="mb-8">
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <Instagram className="w-4 h-4 text-primary-darker" />
+                                        <p className="text-sm font-semibold text-gray-700">{t('contact.instagram')}</p>
                                     </div>
-                                    <div>
-                                        <p className="text-sm text-gray-500 mb-1">{t('contact.instagram')}</p>
-                                        <p className="text-gray-800 font-medium">
-                                            @holacolombiaservices
-                                            <span className="text-gray-400 text-sm ml-2">{t('contact.instagramStatus')}</span>
-                                        </p>
-                                    </div>
+                                    <p className="text-gray-800 ml-6">
+                                        @holacolombiaservices
+                                        <span className="text-gray-400 text-sm ml-2">{t('contact.instagramStatus')}</span>
+                                    </p>
                                 </div>
 
                                 {/* Location */}
                                 <div className="pt-6 border-t border-gray-100">
-                                    <div className="flex items-start space-x-4">
-                                        <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <span className="text-xl">📍</span>
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-gray-500 mb-1">Location</p>
-                                            <p className="text-gray-800 font-medium">
-                                                Barranquilla, Colombia
-                                            </p>
-                                        </div>
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <MapPin className="w-4 h-4 text-primary-darker" />
+                                        <p className="text-sm font-semibold text-gray-700">Location</p>
                                     </div>
+                                    <p className="text-gray-800 ml-6">
+                                        Barranquilla, Colombia
+                                    </p>
                                 </div>
                             </div>
                         </div>
